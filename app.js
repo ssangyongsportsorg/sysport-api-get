@@ -18,7 +18,7 @@ app.get('/a', async (req, res) => {
                 grant_type: 'client_credentials',
                 client_id: 'ymk1q0glzppg02jjizsz3',
                 client_secret: '04ygZSnwYW8TG01YXf1sm3MpDpdMdAx6',
-                resource: 'https://default.logto.app/api,
+                resource: 'https://default.logto.app/api',
                 scope: 'all'
             })
         });

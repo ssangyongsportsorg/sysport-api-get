@@ -5,7 +5,19 @@ const querystring = require('querystring');
 const app = express();
 let currentToken = null;
 
-// 路由 /a - 獲取 token
+// 簡單的密碼檢查中間件
+const checkPassword = (req, res, next) => {
+    const password = req.query.password;
+    const correctPassword = 'iDTPf~ZB4!qUg)^]rBE1ce]haE#)gq+:,U5@~?9+BBor^n~a,~JG1~r.X!1NG-]hy--xsh?C6P5.:mJ+RHu6-8hemM+z!ue@@fK.'; // 替換成你想要的密碼
+    
+    if (password === correctPassword) {
+        next();
+    } else {
+        res.status(401).send('需要正確的密碼才能查看 token');
+    }
+};
+
+// 路由 /a - 獲取 token（不需要密碼）
 app.get('/a', async (req, res) => {
     try {
         const tokenResponse = await axios({
@@ -18,30 +30,29 @@ app.get('/a', async (req, res) => {
                 grant_type: 'client_credentials',
                 client_id: 'ymk1q0glzppg02jjizsz3',
                 client_secret: '04ygZSnwYW8TG01YXf1sm3MpDpdMdAx6',
-                resource: 'https://default.logto.app/api',
+                resource: 'https://ssport/api',
                 scope: 'all'
             })
         });
         
-        // 只儲存 access_token
         currentToken = tokenResponse.data.access_token;
-        res.send('Token has been retrieved successfully');
+        res.send('Token 已成功更新');
     } catch (error) {
         console.error('Error fetching token:', error);
-        res.status(500).send('Error fetching token');
+        res.status(500).send('獲取 token 時發生錯誤');
     }
 });
 
-// 路由 /b - 只顯示 access_token
-app.get('/b', (req, res) => {
+// 路由 /b - 顯示 token（需要密碼）
+app.get('/b', checkPassword, (req, res) => {
     if (currentToken) {
         res.send(currentToken);
     } else {
-        res.status(404).send('No token available. Please visit /a first');
+        res.status(404).send('目前沒有可用的 token，請先訪問 /a');
     }
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`服務器運行在端口 ${PORT}`);
 });

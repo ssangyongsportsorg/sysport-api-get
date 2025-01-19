@@ -1,0 +1,39 @@
+name: Update Dependencies
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'  # You can change the Node.js version as needed
+
+    - name: Install dependencies
+      run: |
+        npm ci  # Use npm ci for a clean install based on package-lock.json
+        npm init -y
+
+    - name: Remove pagedone package
+      run: |
+        npm install express axios
+    - name: Commit changes
+      run: |
+        git config --local user.name "github-actions"
+        git config --local user.email "github-actions@github.com"
+        git add package.json package-lock.json
+        git diff --cached --quiet || git commit -m "chore: update dependencies"  # Commit only if there are changes
+        git push
+
+    - name: Run tests
+      run: |
+        npm test  # Run tests if you have a test script

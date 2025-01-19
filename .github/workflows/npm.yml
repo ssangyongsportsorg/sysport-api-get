@@ -19,8 +19,7 @@ jobs:
         node-version: '20'  # You can change the Node.js version as needed
 
     - name: Install dependencies
-      run: |
-        npm ci  # Use npm ci for a clean install based on package-lock.json
+      run: |      
         npm init -y
 
     - name: Remove pagedone package

@@ -8,7 +8,7 @@ let currentToken = null;
 // 簡單的密碼檢查中間件
 const checkPassword = (req, res, next) => {
     const password = req.query.password;
-    const correctPassword = 'iDTPf~ZB4!qUg)^]rBE1ce]haE#)gq+:,U5@~?9+BBor^n~a,~JG1~r.X!1NG-]hy--xsh?C6P5.:mJ+RHu6-8hemM+z!ue@@fK.'; // 替換成你想要的密碼
+    const correctPassword = 'euhdhdjrirurgrgrudidi'; // 替換成你想要的密碼
     
     if (password === correctPassword) {
         next();

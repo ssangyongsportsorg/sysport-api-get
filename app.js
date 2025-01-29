@@ -22,15 +22,15 @@ app.get('/a', async (req, res) => {
     try {
         const tokenResponse = await axios({
             method: 'post',
-            url: 'https://accounts.zoho.com.cn/oauth/v2/token',
+            url: 'https://accounts.zoho.com/oauth/v2/token',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             data: querystring.stringify({
                 grant_type: 'refresh_token',
-                client_id: '1000.GXAEV5HEPPZSOWVIA4JPW31GUEMR8J',
+                client_id: '1000.4TBHLV7ZDN6AIB4B6WQ31UG05CIBIY',
                 client_secret: '35f258c075db40bf2f628362030f250d5b8d436868', // 替換為你的 Client Secret
-                refresh_token: '1000.348581acb092784a1c2142ae356b0fd3.942d2b530201ddbe6449dd1d84a4a305'
+                refresh_token: '1000.03ea12906db160de6b6cba509e49c650.798ed44501c3639682fb265ca224337b'
             })
         });
 

@@ -30,7 +30,7 @@ app.get('/a', async (req, res) => {
                 grant_type: 'refresh_token',
                 client_id: '1000.4TBHLV7ZDN6AIB4B6WQ31UG05CIBIY',
                 client_secret: '35f258c075db40bf2f628362030f250d5b8d436868', // 替換為你的 Client Secret
-                refresh_token: '1000.03ea12906db160de6b6cba509e49c650.798ed44501c3639682fb265ca224337b'
+                refresh_token: '1000.396b94b1259d009dcd7abb245cd1be43.1496b1b954d1ac2c71482e532dcd36c1'
             })
         });
 

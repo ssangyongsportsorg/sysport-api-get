@@ -17,28 +17,27 @@ const checkPassword = (req, res, next) => {
     }
 };
 
-// 路由 /a - 獲取 token（不需要密碼）
+// 路由 /a - 獲取新的 access token（不需要密碼）
 app.get('/a', async (req, res) => {
     try {
         const tokenResponse = await axios({
             method: 'post',
-            url: 'https://auth.ssangyongsports.eu.org/oidc/token',
+            url: 'https://accounts.zoho.com.cn/oauth/v2/token',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             data: querystring.stringify({
-                grant_type: 'client_credentials',
-                client_id: 'ymk1q0glzppg02jjizsz3',
-                client_secret: '04ygZSnwYW8TG01YXf1sm3MpDpdMdAx6',
-                resource: 'https://default.logto.app/api',
-                scope: 'all'
+                grant_type: 'refresh_token',
+                client_id: '1000.GXAEV5HEPPZSOWVIA4JPW31GUEMR8J',
+                client_secret: '35f258c075db40bf2f628362030f250d5b8d436868', // 替換為你的 Client Secret
+                refresh_token: '1000.348581acb092784a1c2142ae356b0fd3.942d2b530201ddbe6449dd1d84a4a305'
             })
         });
-        
+
         currentToken = tokenResponse.data.access_token;
         res.send('Token 已成功更新');
     } catch (error) {
-        console.error('Error fetching token:', error);
+        console.error('獲取 token 時發生錯誤:', error);
         res.status(500).send('獲取 token 時發生錯誤');
     }
 });
